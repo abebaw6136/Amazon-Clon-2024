@@ -119,9 +119,6 @@ width: 8%;
 }
 .cart {
   position: relative;
-  display: flex; 
-  align-items: center;
-  margin-left: auto;
 }
 .cart_count {
   background-color: #d49644;
@@ -141,7 +138,7 @@ width: 8%;
 .cart span {
   position: adsolute;
   font-weight: bold;
-  top: 10px;
+  top: 0px;
   font-size: 20px;
   background-color: #1a1a1a;
   left: 16px;
