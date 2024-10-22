@@ -1,14 +1,16 @@
+import React from "react";
+import Header from "./Componets/Header/Header";
+import Carousel from "./Componets/Carousel/Carousel"
 
-import './App.css';
-import Header from './Componets/Header/Header';
 
 function App() {
-  return (
-    <div>
-      <Header/>
-      
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <Carousel />
+           
+        </div>
+    );
 }
 
 export default App;

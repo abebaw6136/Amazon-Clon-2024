@@ -5,7 +5,7 @@ import { BiCart } from '@react-icons/all-files/bi/BiCart';
 import LowerHeader from './LowerHeader'; // Ensure the import is correct
 import classes from './Header.module.css';
 
-export default function Header() {
+const Header = () =>  {
   return (
     <>
     <section>
@@ -77,4 +77,4 @@ export default function Header() {
   );
 }
 
-
+export default Header;

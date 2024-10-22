@@ -5,12 +5,10 @@
     gap: 10px;
     align-items: center;
     color: white;
-    height: 100px;
-    align-items: center;
+    width: 100%;
+    height: 70px;
     padding: 10px 20px;
-    
-      
-       
+         
      
 }
 
@@ -21,7 +19,7 @@
     max-width: 250px;
 }
 
-.logo_container {
+.logo_container img {
   width: 80%;
   padding-top: 5px;
   margin-left: 20px;
@@ -50,7 +48,7 @@
   overflow: hidden;
   width: 100%;
   flex:1;
-  height: 40px;
+ 
 }
 .search select,
 
@@ -58,30 +56,24 @@
   padding:10px;
   font-weight: bold;
   outline: 1px solid white;
-  height:100% ;
-  width: 40%;
-
 }
+
 .search select{
 border: none;
 width: 8%;
+background-color:whitesmoke;
 }
 .search input {
- /* border: 1px solid white;*/
-  width: 70%;
+ border: 1px solid white;
+  width: 100%;
   margin-right: -2px;
+  border: none;
 }
 .search svg {
-  padding: 8px;
-  background: #1a1a1a;
-  height: 32px; 
-  width: 32px; /* Keep aspect ratio */
-    display: flex; /* Center the icon */
-    align-items: center; /* Center vertically */
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+  padding: 7px;
+  background: #F3A847;
+  color: #1a1a1a;
+    
 }
   .search svg:hover {
     background-color: #d49644;
@@ -120,31 +112,18 @@ width: 8%;
 .cart {
   position: relative;
 }
-.cart_count {
-  background-color: #d49644;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 14px;
-  position: absolute;
-  top: -5px;
-  right: -10.px;
-  min-width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .cart span {
   position: adsolute;
   font-weight: bold;
-  top: 0px;
+  top: -6px;
   font-size: 20px;
   background-color: #1a1a1a;
-  left: 16px;
+  left: 14px;
   color: orange;
 
 }
+
 .order_container a:hover,
 .delivery:hover,
 
@@ -155,38 +134,10 @@ width: 8%;
   
 }
 
-
-.amazon-logo-container {
-  display: flex;
-  align-items: center;  /* Center vertically */
-  justify-content: center;  /* Center horizontally */
-  width: 120px;  /* Adjust as needed */
-  height: 40px;  /* Adjust as needed */
-  overflow: hidden;  /* Hide overflow */
-}
-
-.amazon-logo {
-  width: 100%;  /* Fill the container */
-  height: auto;  /* Maintain aspect ratio */
-  max-width: 100%;  /* Ensure responsiveness */
-  max-height: 100%;  /* Prevent overflow */
-  object-fit: contain;  /* Maintain aspect ratio within the container */
-}
-
-.order_container {
-  display: flex; /* Enables flexbox layout */
-  justify-content: flex-start; /* Aligns items to the start */
-  align-items: center; /* Vertically centers items */
-  padding: 10px; /* Optional: Add some padding */
-  /*background-color: #f8f8f8; /* Optional: Background color */
-  gap: 10;
-  
-}
-
-{/*.logo_container {
+.logo_container {
   background-color: #232f3e;
   color: white;
-}*/}
+}
 
 @media screen and  (max-width: 756px) {
   .header_container{
@@ -194,7 +145,7 @@ width: 8%;
     flex-direction: column !important;
     height: auto;
   }
-  .logo_container ul li:not(:first){
+  .lower_container ul li:not(:first){
     display: none;
   }
   .language{
@@ -214,33 +165,29 @@ width: 8%;
   background-color: #232f3e;
   color: white;
   display: flex;  
- 
   
-
 }
 .lower_container ul {
   display: flex; /* Use Flexbox for the list */
   list-style: none;
-  padding: 0;
   gap: 5px;
   align-items: center;
 }
 
 .lower_container ul li {
   padding: 8px;
-  flex-direction: row;
- 
-  
+
 }
-.logo_container ul li:first-child {
+
+.lower_container ul li:first-child {
   display: flex;
   gap: 2px;
-  align-items: center;
   
 }
 
 .lower_container {
-  background-color: #f3f3f3;
+  background-color: #232f3e;
+  color: #fff;
   padding: 10px 20px;
   width: 100%;
   height: 30px;
@@ -254,5 +201,6 @@ width: 8%;
 }
 .menu_item p {
   margin-left: 5px; /* Space between the icon and the text */
+
 }
 
