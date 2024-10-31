@@ -9,7 +9,7 @@ function Carousel() {
             <ResponsiveCarousel
                 autoPlay={true}
                 infiniteLoop={true}
-                showIndicators={false}
+                showIndicators={true}
                 showThumbs={false}
             >
                 {

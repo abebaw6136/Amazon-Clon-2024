@@ -1,17 +1,14 @@
 
-
 import React from 'react';
-import CatagoryFullinfos from './CatagoryFullinfos';
+import { CatagoryFullinfos } from './CatagoryFullinfos';
 import CatagoryCard from './CatagoryCard';
-import styles from './Catagory.module.css'; // Import the CSS module
+import classes from './Catagory.module.css'; // Ensure the import path is correct
 
 function Catagory() {
     return (
-        <section className={styles.catagoryContainer}>
+        <section className={classes.catagory_container}>
             {CatagoryFullinfos.map((infos) => (
-                <div className={styles.catagoryCard} key={infos.title}>
-                    <CatagoryCard data={infos} />
-                </div>
+                <CatagoryCard key={infos.name} data={infos} />
             ))}
         </section>
     );
