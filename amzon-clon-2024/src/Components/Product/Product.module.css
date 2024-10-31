@@ -1,4 +1,4 @@
-.card_container {
+/*.card_container {
     width: 250px;
     box-shadow: 0 0 10px rgb(0,0,0.2);
     padding: 10px;
@@ -8,4 +8,109 @@
 }
 .card_container:hover .button{
     display: block;
+
+}
+
+.card_container img {
+    padding: 10px;
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+.button {
+    display: none;
+    padding: 5px 10px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    width: 100%;
+    margin: 10px 0;
+    border-radius:30px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.button:hover {
+    background-color: var(--primary-shade);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.products_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    max-width: 1450px;
+    margin: 100px auto 100px auto;
+    gap: 50px;
+    justify-items: center;
+}
+.products_container section {
+    margin: 0 auto;
+    width: 100%;
+
+}*/
+
+.card_container {
+    width: 250px; /* Fixed width for each card */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Use rgba for better transparency control */
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+}
+
+.card_container:hover .button {
+    display: block; /* Show button on hover */
+}
+
+.card_container img {
+    padding: 10px;
+    width: 100%; /* Full width of the card */
+    height: 200px;
+    object-fit: contain;
+}
+
+.button {
+    display: none; /* Hidden by default */
+    padding: 5px 10px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 30px; /* Rounded corners */
+    position: absolute;
+    bottom: 10px; /* Adjusted for better placement */
+    left: 0;
+}
+
+.button:hover {
+    background-color: var(--primary-shade);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.products_container {
+    display: grid; /* Use CSS Grid */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust to 250px for consistent card size */
+    max-width: 1450px; /* Set a maximum width for the grid container */
+    margin: 100px auto; /* Center the grid container */
+    gap: 50px; /* Space between cards */
+    justify-items: center; /* Center items in their grid cells */
+}
+
+/* Optional: Remove section styling if not needed */
+.products_container section {
+    margin: 0 auto; /* Center sections */
+    width: 100%; /* Ensure sections take full width */
 }
