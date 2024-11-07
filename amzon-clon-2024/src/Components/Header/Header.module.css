@@ -60,8 +60,7 @@
 
 .search select{
 border: none;
-width: 8%;
-background-color:whitesmoke;
+
 }
 .search input {
  border: 1px solid white;
@@ -122,6 +121,9 @@ background-color:whitesmoke;
   font-size: 20px;
   background-color: #1a1a1a;
   left: 14px;
+  right: auto;
+  -webkit-box-pack: center;
+  justify-content: center;
   color: orange;
 
 }

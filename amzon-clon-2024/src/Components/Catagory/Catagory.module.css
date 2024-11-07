@@ -15,7 +15,7 @@
 .category_image {
     width: 100%;
     object-fit: contain;
-    max-height: 250px; /* Ensure images fit within the card */
+    max-height: 250px;
     padding: 1px 10px;
 }
 
@@ -44,3 +44,4 @@
     place-items: center;
     gap: 16px;
 }
+
