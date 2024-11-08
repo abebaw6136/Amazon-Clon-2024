@@ -1,5 +1,5 @@
-/*.card_container {
-    width: 250px;
+.card_container {
+    width: 300px;
     box-shadow: 0 0 10px rgb(0,0,0.2);
     padding: 10px;
     color: black;
@@ -43,7 +43,7 @@
 
 .products_container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, 1fr, minmax(200px, 1fr));
     max-width: 1450px;
     margin: 100px auto 100px auto;
     gap: 50px;
@@ -53,64 +53,59 @@
     margin: 0 auto;
     width: 100%;
 
-}*/
-
-.card_container {
-    width: 250px; /* Fixed width for each card */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Use rgba for better transparency control */
-    padding: 10px;
-    color: black;
-    text-decoration: none;
-    position: relative;
 }
-
-.card_container:hover .button {
-    display: block; /* Show button on hover */
-}
-
-.card_container img {
-    padding: 10px;
-    width: 100%; /* Full width of the card */
-    height: 200px;
-    object-fit: contain;
-}
-
-.button {
-    display: none; /* Hidden by default */
-    padding: 5px 10px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    width: 100%;
-    margin: 10px 0;
-    border-radius: 30px; /* Rounded corners */
-    position: absolute;
-    bottom: 10px; /* Adjusted for better placement */
-    left: 0;
-}
-
-.button:hover {
-    background-color: var(--primary-shade);
-}
-
-.rating {
+.product_flexed {
+    box-shadow: none;
+    height: auto;
     display: flex;
-    align-items: center;
-    padding: 10px 0;
-}
+    gap: 50px;
+    width: 100%;
 
+}
+.product_flexed h3 {
+    padding: 20px 0px;
+}
+.product_flexed .button {
+    display: block;
+    position: static;
+    width: 150px;
+    margin-right: 40px;
+}
+.product_flexed{
+    height: 50vh;
+}
+.product_flexed img {
+    width: 300px !important;
+    height: auto;
+}
 .products_container {
-    display: grid; /* Use CSS Grid */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust to 250px for consistent card size */
-    max-width: 1450px; /* Set a maximum width for the grid container */
-    margin: 100px auto; /* Center the grid container */
-    gap: 50px; /* Space between cards */
-    justify-items: center; /* Center items in their grid cells */
+    display: flex; /* Use Flexbox */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: space-between; /* Space items evenly */
+    max-width: 1450px; /* Max width for the container */
+    margin: 100px auto; /* Center the container */
 }
 
-/* Optional: Remove section styling if not needed */
-.products_container section {
-    margin: 0 auto; /* Center sections */
-    width: 100%; /* Ensure sections take full width */
+.product_card {
+    flex: 0 0 calc(20% - 40px); /* 20% width for 5 columns minus margin */
+    margin: 20px; /* Space between cards */
+}
+
+/* Adjust for responsiveness */
+@media screen and (max-width: 1024px) {
+    .product_card {
+        flex: 0 0 calc(30% - 40px); /* 3 columns for medium screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product_card {
+        flex: 0 0 calc(45% - 40px); /* 2 columns for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .product_card {
+        flex: 0 0 100%; /* 1 column for mobile screens */
+    }
 }
