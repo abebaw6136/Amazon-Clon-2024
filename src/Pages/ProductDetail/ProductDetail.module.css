@@ -1,0 +1,78 @@
+
+
+.productDetailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background color */
+}
+
+.productCard {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd; /* Light border for the card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 20px 0;
+    background-color: #fff; /* White background for the card */
+    max-width: 900px; /* Max width for the card */
+    width: 100%; /* Full width on smaller screens */
+}
+
+.imgContainer {
+    flex: 1; /* Allow image to take available space */
+    padding: 20px; /* Padding around the image */
+}
+
+.imgContainer img {
+    max-width: 100%; /* Responsive image */
+    border-radius: 8px; /* Rounded image corners */
+}
+
+.productInfo {
+    flex: 2; /* Allow info section to take more space */
+    padding: 20px;
+}
+
+.productInfo h3 {
+    font-size: 24px; /* Title font size */
+    margin: 0 0 10px; /* Margin for spacing */
+}
+
+.productInfo .rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space below rating */
+}
+
+.productInfo small {
+    margin-left: 10px; /* Space between rating and count */
+    color: #666; /* Gray color for count */
+}
+
+.productInfo p {
+    margin: 10px 0; /* Margin for spacing around paragraphs */
+    line-height: 1.5; /* Line height for readability */
+}
+
+.productInfo .button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded button corners */
+    padding: 10px 20px; /* Padding for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.productInfo .button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+@media (max-width: 768px) {
+    .productCard {
+        flex-direction: column; /* Stack elements on small screens */
+    }
+}
+
