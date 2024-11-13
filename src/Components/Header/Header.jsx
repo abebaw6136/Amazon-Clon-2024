@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react'; // Ensure useState is imported
 import { SlLocationPin } from 'react-icons/sl';
-import { BsSearch } from 'react-icons/bs'; // Adjusted import
+import { BsSearch } from 'react-icons/bs';
 import { BiCart } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import LowerHeader from './LowerHeader';
@@ -8,13 +8,18 @@ import classes from './Header.module.css';
 import { DataContext } from '../DataProvider/DataProvider';
 
 const Header = () => {
-  const [state, dispatch] = useContext(DataContext); // Destructure state and dispatch
-  const { basket } = state; // Extract basket from state
+  const [{ basket }, dispatch] = useContext(DataContext);
+  const [searchTerm, setSearchTerm] = useState(''); // State to manage search input
+  const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0);
 
   const handleSearch = (event) => {
     event.preventDefault();
     // Implement your search logic here
+    console.log('Searching for:', searchTerm);
+    // You could redirect to a search results page, for example
+    // history.push(`/search?query=${searchTerm}`);
   };
+
 
 
   return (
@@ -25,9 +30,9 @@ const Header = () => {
             <Link to='/'>
               <img
                 src='https://pngimg.com/uploads/amazon/small/amazon_PNG11.png'
-                alt='amazon logo'
-              />
+                alt='amazon logo'/>
             </Link>
+
             <span className={classes.location_icon}>
               <SlLocationPin />
             </span>
@@ -56,7 +61,7 @@ const Header = () => {
                 <option value=''>EN</option>
               </select>
             </Link>
-            <Link to='/signin'>
+            <Link to='/auth'>
               <p>Sign In</p>
               <span>Account & Lists</span>
             </Link>
@@ -66,7 +71,7 @@ const Header = () => {
             </Link>
             <Link to='/cart' className={classes.Cart}>
               <BiCart size={35} />
-              <span >{basket.length}</span>
+              <span >{totalItem}</span>
             </Link>
           </div> 
         </div>
