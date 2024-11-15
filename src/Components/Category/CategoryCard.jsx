@@ -1,11 +1,13 @@
 
 import React from 'react';
-import classes from './Catagory.module.css'; // Ensure the import path is correct
+import classes from './Category.module.css';
 import { Link } from 'react-router-dom';
 
-function CatagoryCard({ data }) {
+function CategoryCard({ data }) {
+    
+
     return (
-        <div className={classes.catagory}>
+        <div className={classes.category}>
             {/* Corrected Link: Use backticks for string interpolation */}
             <Link to={`/category/${data.name}`}>
 
@@ -23,4 +25,4 @@ function CatagoryCard({ data }) {
     );
 }
 
-export default CatagoryCard;
+export default CategoryCard;

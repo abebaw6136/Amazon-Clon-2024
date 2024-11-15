@@ -1,6 +1,6 @@
-// src/Components/Catagory/CatagoryFullinfos.js
 
-export const CatagoryFullinfos = [
+
+export const CategoryFullinfos = [
     {
         title: "Electronics",
         name: "electronics",
@@ -23,4 +23,4 @@ export const CatagoryFullinfos = [
     },
 ];
 
-export default CatagoryFullinfos;
+export default CategoryFullinfos;

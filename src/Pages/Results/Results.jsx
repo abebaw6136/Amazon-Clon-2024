@@ -11,16 +11,18 @@ import Loader from '../../Components/Loader/Loader'; // Ensure this path is corr
 
 
 function Results() {
-  const { CatagoryName } = useParams();
+  const { CategoryName } = useParams();
   const [results, setResults] = useState([]); // State for storing results
   const [isLoading, setIsLoading] = useState(true); 
   const [error, setError] = useState(null);
   
  
+  console.log("No products found for category:", CategoryName);
+
 
   useEffect(() => {
     setIsLoading(true); // Start loading
-    axios.get(`${productUrl}/products/category/${CatagoryName}`)
+    axios.get(`${productUrl}/products/category/${CategoryName}`)
     .then((res) => {
       
       setResults(res.data); // Set results to state
@@ -31,13 +33,13 @@ function Results() {
         setError("Failed to fetch products."); // Set error message
         setIsLoading(false); // Stop loading
       });
-  }, [CatagoryName]); // Adding catagoryName as a dependency
+  }, [CategoryName]); // Adding catagoryName as a dependency
 
   return (
     <LayOut>
       <section>
         <h1 style={{ padding: "30px" }}>Results</h1>
-        <p style={{ padding: "30px" }}>Category: {CatagoryName}</p>
+        <p style={{ padding: "30px" }}>Category: {CategoryName}</p>
         <hr />
         {isLoading ? (
           <Loader /> // Correct loader component syntax

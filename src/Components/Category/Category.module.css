@@ -1,5 +1,5 @@
 
-.catagory {
+.category {
     height: 400px;
     width: 350px;
     background-color: white;
@@ -8,7 +8,7 @@
    
 }
 
-.catagory:hover {
+.category:hover {
     transform: scale(1.05);
 }
 
@@ -19,24 +19,24 @@
     padding: 1px 10px;
 }
 
-.catagory a {
+.category a {
     text-decoration: none;
     color: rgb(35, 35, 35);
 }
 
-.catagory h2,
-.catagory p {
+.category h2,
+.category p {
     padding: 5px;
     margin-left: 15px;
 }
 
-.catagory p {
+.category p {
     font-size: 12px;
     font-weight: bold;
     color: rgb(9, 132, 209);
 }
 
-.catagory_container {
+.category_container {
     position: relative;
     margin-top: -10%; 
     display: grid;

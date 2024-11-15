@@ -1,7 +1,7 @@
 import React from 'react'
 import LayOut from '../../Components/LayOut/LayOut';
 import Carousel from '../../Components/Carousel/Carousel';
-import Catagory from '../../Components/Catagory/Catagory';
+import Category from '../../Components/Category/Category';
 import Product from '../../Components/Product/Product';
 
 
@@ -10,7 +10,7 @@ import Product from '../../Components/Product/Product';
     <div>
        <LayOut>
             <Carousel />
-           <Catagory/>
+           <Category/>
            <Product />
            
            </LayOut>
