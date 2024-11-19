@@ -7,21 +7,24 @@ import { DataContext } from '../DataProvider/DataProvider';
 import { type } from '../../Utility/action.type';
 
 
-function ProductCard({ product,flex,renderDesc,renderADD }) {
-    const { image, title,Id, rating, price,description  } = product;
-    const [state,dispatch]=useContext(DataContext)
+function ProductCard({ product, flex, renderDesc, renderADD }) {
+    const { image, title, id, rating, price, description } = product; // Consistent casing
+    const [state, dispatch] = useContext(DataContext);
 
-    console.log(state);
-
-
-    const addToCart=()=>{
-        dispatch({
-            type:type.ADD_TO_BASKET,
-            item: {
-                image, title,Id, rating, price,description 
-            }
-        })
+    function addToCart() {
+        const existingItem = state.basket.find(item => item.id === id);
+        if (existingItem) {
+            // Optionally, you can update the quantity here
+        } else {
+            dispatch({
+                type: type.ADD_TO_BASKET,
+                item: {
+                    image, title, id, rating, price, description
+                },
+            });
+        }
     }
+
     return (
         <div className={`${classes.card_container} ${flex ? classes.product_flexed : ''}`}>
             <Link to={`/products/${product.id}`}>

@@ -16,24 +16,24 @@ function Results() {
   const [isLoading, setIsLoading] = useState(true); 
   const [error, setError] = useState(null);
   
- 
-  console.log("No products found for category:", CategoryName);
 
 
   useEffect(() => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     axios.get(`${productUrl}/products/category/${CategoryName}`)
-    .then((res) => {
-      
-      setResults(res.data); // Set results to state
-      setIsLoading(false); // Stop loading
-    }) 
+      .then((res) => {
+        
+        setResults(res.data || []); 
+        setIsLoading(false);
+      })
       .catch((err) => {
         console.error(err);
-        setError("Failed to fetch products."); // Set error message
-        setIsLoading(false); // Stop loading
+        setError("Failed to fetch products.");
+        setResults([]); // Prevent undefined
+        setIsLoading(false);
       });
-  }, [CategoryName]); // Adding catagoryName as a dependency
+  }, [CategoryName]);
+
 
   return (
     <LayOut>
@@ -47,7 +47,7 @@ function Results() {
           <p>{error}</p> // Display error message if there is an error
         ) : (
           <div className={classes.products_container}>
-            {results.length > 0 ? ( // Check if results exist
+            {Array.isArray(results) && results.length > 0 ? ( // Check if results exist
               results.map((product) => (
                 <ProductCard
                   key={product.id}

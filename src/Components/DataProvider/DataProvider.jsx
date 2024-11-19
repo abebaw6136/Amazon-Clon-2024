@@ -2,11 +2,9 @@
 
 import React, { createContext, useReducer } from 'react';
 
-
 // Initial state
 const initialState = {
-    basket: [], // Make sure this is defined as an empty array
-    // Other initial state properties if needed
+    basket: [], 
 };
 
 // Create context
@@ -15,9 +13,33 @@ const DataContext = createContext();
 // Reducer function
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'ADD_TO_BASKET':
-            return { ...state, basket: [...state.basket, action.item] };
-        // Handle other actions
+        case 'ADD_TO_BASKET': {
+            const existingItemIndex = state.basket.findIndex(item => item.id === action.item.id);
+            let newBasket = [...state.basket];
+
+            if (existingItemIndex >= 0) {
+                // Item exists, increment the amount
+                newBasket[existingItemIndex].amount += 1;
+            } else {
+                // Item does not exist, add it to the basket with amount 1
+                newBasket.push({ ...action.item, amount: 1 });
+            }
+
+            return { ...state, basket: newBasket };
+        }
+        case 'REMOVE_FROM_BASKET': {
+            const index = state.basket.findIndex(item => item.id === action.id);
+            let newBasket = [...state.basket];
+
+            if (index >= 0) {
+                if (newBasket[index].amount > 1) {
+                    newBasket[index].amount -= 1;
+                } else {
+                    newBasket.splice(index, 1);
+                }
+            }
+            return { ...state, basket: newBasket };
+        }
         default:
             return state;
     }
@@ -34,4 +56,5 @@ const DataProvider = ({ children }) => {
     );
 };
 
+// Export context and provider
 export { DataContext, DataProvider };

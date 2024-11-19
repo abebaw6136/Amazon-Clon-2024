@@ -1,11 +1,14 @@
-*{
+* {
   padding: 0;
   margin: 0;
 }
-.fixed{
-  position: sticky;
+
+.fixed {
+  position: fixed; /* Changed from sticky to fixed */
   top: 0;
-  z-index: 100;
+  left: 0; /* Ensures it starts from the left */
+  right: 0; /* Ensures it stretches across */
+  z-index: 1000; /* High z-index to stay above other elements */
 }
 
 .header_container {
@@ -16,7 +19,6 @@
   align-items: center;
   color: white;
   height: 70px;
- 
 }
 
 .logo_container {
@@ -24,7 +26,6 @@
   align-items: center;
   justify-content: center;
   max-width: 250px;
-  
 }
 
 .logo_container img {
@@ -146,7 +147,6 @@
   position: relative;
 }
 
-
 .order_container a:hover,
 .delivery:hover,
 .logo_container a:hover {
@@ -164,31 +164,7 @@
   margin-left: 8px;
 }
 
-.Lowerheader {
-  background-color: #232f3e;
-  color: white;
-  display: flex;
- 
-}
 
-.lower_container ul {
-  display: flex;
-  list-style: none;
-  gap: 5px;
-  align-items: center;
- 
-}
-
-.lower_container ul li {
-  padding: 8px;
-  
-}
-
-.lower_container ul li:first-child {
-  display: flex;
-  gap: 2px;
-  
-}
 
 .lower_container {
   background-color: #232f3e;
@@ -198,7 +174,32 @@
   height: 30px;
   display: flex;
   align-items: center;
+}
+
+.lower_container ul {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.logo_container li {
   cursor: pointer;
+  transition: color 0.3s;
+  padding: 8px;
+}
+.lower_container li:hover{
+  color: #F3A847;
+}
+.lower_container ul li {
+  padding: 8px;
+}
+
+.lower_container ul li:first-child {
+  display: flex;
+  gap: 2px;
+  align-items: center;
 }
 
 .menu_item {
@@ -209,24 +210,37 @@
 
 .menu_item p {
   margin-left: 5px;
+  font-weight: bold;
 }
 
-
+.Lowerheader {
+  background-color: #232f3e;
+  color: white;
+  display: flex;
+  position: sticky; /* Change to sticky */
+  top: 70px; /* Adjust according to the height of the upper header */
+  width: 100%;
+  z-index: 999;
+}
+.content {
+  padding-top: 100px; /* Adjust based on the height of the lower header */
+}
 
 @media screen and (max-width: 756px) {
   .header_container {
-      flex-direction: column !important;
-      height: auto;
+    flex-direction: column !important;
+    height: auto;
   }
 
   .lower_container ul li:not(:first-child) {
-      display: none;
+    display: none;
   }
 
   .language {
-      display: none;
+    display: none;
   }
 }
+
 @media screen and (max-width: 768px) {
   .Cart span {
     top: -5px;

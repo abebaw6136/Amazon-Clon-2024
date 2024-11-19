@@ -1,5 +1,5 @@
 .card_container {
-    width: 300px;
+    width: 250px;
     box-shadow: 0 0 10px rgb(0,0,0.2);
     padding: 10px;
     color: black;
@@ -43,10 +43,10 @@
 
 .products_container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fil,mi);
     max-width: 1450px;
     margin: 100px auto 100px auto;
-    gap: 50px;
+    gap: 30px;
     justify-items: center;
 }
 .products_container section {
@@ -75,7 +75,7 @@
     height: 50vh;
 }
 .product_flexed img {
-    width: 300px !important;
+    width: 150px !important;
     height: auto;
 }
 .products_container {
@@ -83,7 +83,7 @@
     flex-wrap: wrap; /* Allow items to wrap */
     justify-content: space-between; /* Space items evenly */
     max-width: 1450px; /* Max width for the container */
-    margin: 100px auto; /* Center the container */
+    margin: 50px auto; /* Center the container */
 }
 
 .product_card {

@@ -7,10 +7,10 @@ const colorContext = createContext()
     return useContext(colorContext)
  }
   export const ThemeProvider =({children})=>{
-  const [color,selector]= useState('light');
+  const [color,setcolor]= useState('light');
 
   const  colorToggler =()=>{
-    ReadableStreamDefaultController((pre)=>per==='light'?'dark':'light')
+    setcolor((pre)=>per==='light'?'dark':'light')
   };
    return (
     <colorContext.Provider value={{color,colorToggler}}>

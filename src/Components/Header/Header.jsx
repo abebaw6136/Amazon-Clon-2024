@@ -8,16 +8,15 @@ import classes from './Header.module.css';
 import { DataContext } from '../DataProvider/DataProvider';
 
 const Header = () => {
-  const [{ basket }, dispatch] = useContext(DataContext);
+  const [{ basket }] = useContext(DataContext); // Ensure DataContext returns the correct state
   const [searchTerm, setSearchTerm] = useState(''); // State to manage search input
   const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0);
 
   const handleSearch = (event) => {
     event.preventDefault();
-    // Implement your search logic here
+    
     console.log('Searching for:', searchTerm);
-    // You could redirect to a search results page, for example
-    // history.push(`/search?query=${searchTerm}`);
+    
   };
 
 
