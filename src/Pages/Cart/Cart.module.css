@@ -64,7 +64,11 @@
     margin: 10px;
 }
 
+
 .subtotal {
+    z-index: 1000; /* Ensure it's above the lower header */
+    margin-top: 80px; /* Adjust based on the height of your headers */
+    
     padding: 20px;
     min-width: 300px;
     height: 80%; /* Corrected from 'outo' */
@@ -76,9 +80,9 @@
     background-color: rgb(224, 241, 241); /* Fixed spacing */
     border-radius: 5px;
     margin-top: 20px; /* Added margin to ensure space above */
-    opacity: 1 !important; /* Ensure it's fully opaque */
+    /*opacity: 1 !important; /* Ensure it's fully opaque */
+    
 }
-
 
 
 
