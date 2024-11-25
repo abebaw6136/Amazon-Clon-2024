@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'; // Ensure useState is imported
+import React, { useContext, useState } from 'react';
 import { SlLocationPin } from 'react-icons/sl';
 import { BsSearch } from 'react-icons/bs';
 import { BiCart } from 'react-icons/bi';
@@ -6,20 +6,22 @@ import { Link } from 'react-router-dom';
 import LowerHeader from './LowerHeader';
 import classes from './Header.module.css';
 import { DataContext } from '../DataProvider/DataProvider';
+import { auth } from '../../Utility/firebase';
+
 
 const Header = () => {
-  const [{ basket }] = useContext(DataContext); // Ensure DataContext returns the correct state
-  const [searchTerm, setSearchTerm] = useState(''); // State to manage search input
+  const [{ user, basket }] = useContext(DataContext);
+  
+  // Declare searchTerm state
+  const [searchTerm, setSearchTerm] = useState('');
+  
   const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0);
 
   const handleSearch = (event) => {
     event.preventDefault();
-    
-    console.log('Searching for:', searchTerm);
-    
+    // Implement search logic here, e.g., redirect to a search results page
+    console.log('Search Term:', searchTerm);
   };
-
-
 
   return (
     <section className={classes.fixed}>
@@ -45,9 +47,14 @@ const Header = () => {
             <select name='' id=''>
               <option value="">All</option>
             </select>
-            <input type="text" placeholder='Search products' />
+            <input
+              type="text"
+              placeholder='Search products'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm state
+            />
             <button type="submit" aria-label="Search">
-              <BsSearch size={25} />
+              <BsSearch size={20} />
             </button>
           </form>
 
@@ -60,9 +67,20 @@ const Header = () => {
                 <option value=''>EN</option>
               </select>
             </Link>
-            <Link to='/auth'>
-              <p>Sign In</p>
-              <span>Account & Lists</span>
+            <Link to={!user && '/auth'}>
+              <div>
+                {user ? (
+                  <>
+                    <p>{user?.email?.split("@")[0]}</p>
+                    <span onClick={() => auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, Sign In</p>
+                    <span>Account & Lists</span>
+                  </>
+                )}
+              </div>
             </Link>
             <Link to='/orders'>
               <p>Returns</p>
@@ -70,9 +88,9 @@ const Header = () => {
             </Link>
             <Link to='/cart' className={classes.Cart}>
               <BiCart size={35} />
-              <span >{totalItem}</span>
+              <span>{totalItem}</span>
             </Link>
-          </div> 
+          </div>
         </div>
       </section>
       <LowerHeader />

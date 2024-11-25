@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { Helmet } from 'react-helmet'; // Correct import for Helmet
-import { useNavigate } from 'react-router-dom'; // Correct import for useNavigate
+import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
 import classes from './SignUp.module.css';
 import { auth as FirebaseAuth } from '../../Utility/firebase'; 
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { ClipLoader } from 'react-spinners';
 import { DataContext } from '../../Components/DataProvider/DataProvider';
 import { type } from '../../Utility/action.type';
@@ -12,50 +12,65 @@ function AuthComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState({
-    signIn: false,
-    signUp: false // Ensure consistent naming
-  });
-
+  const [loading, setLoading] = useState({ signIn: false, signUp: false });
   const [{ user }, dispatch] = useContext(DataContext);
   const navigate = useNavigate();
 
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const validateInputs = () => {
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return false;
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return false;
+    }
+    return true;
+  };
+
   const authHandler = (e) => {
     e.preventDefault();
-    
     const action = e.target.name;
 
-    if (action === 'signin') {
-      setLoading({ ...loading, signIn: true });
-      signInWithEmailAndPassword(FirebaseAuth, email, password)
-        .then((userInfo) => {
-          dispatch({
-            type: type.SET_USER,
-            user: userInfo.user,
-          });
-          navigate('/'); // Navigate only after successful sign-in
-        })
-        .catch((error) => {
-          setError(error.message);
-        })
-        .finally(() => {
-          setLoading({ ...loading, signIn: false }); // Reset loading state
-        });
-    } else if (action === 'signup') {
+    if (action === 'signup') {
+      if (!validateInputs()) {
+        return; // Stop execution if validation fails
+      }
+
       setLoading({ ...loading, signUp: true });
       createUserWithEmailAndPassword(FirebaseAuth, email, password)
         .then((userInfo) => {
-          dispatch({
-            type: type.SET_USER,
-            user: userInfo.user
-          });
-          navigate('/'); // Navigate only after successful sign-up
+          console.log("User signed up:", userInfo);
+          dispatch({ type: type.SET_USER, user: userInfo.user });
+          navigate('/'); // Navigate after successful sign-up
         })
         .catch((error) => {
+          console.error("Sign-up error:", error);
           setError(error.message);
         })
         .finally(() => {
-          setLoading({ ...loading, signUp: false }); // Reset loading state
+          setLoading({ ...loading, signUp: false });
+        });
+    } else if (action === 'signin') {
+      if (!validateInputs()) {
+        return; // Stop execution if validation fails
+      }
+
+      setLoading({ ...loading, signIn: true });
+      signInWithEmailAndPassword(FirebaseAuth, email, password)
+        .then((userInfo) => {
+          console.log("User signed in:", userInfo);
+          dispatch({ type: type.SET_USER, user: userInfo.user });
+          navigate('/'); // Navigate after successful sign-in
+        })
+        .catch((error) => {
+          console.error("Sign-in error:", error);
+          setError(error.message);
+        })
+        .finally(() => {
+          setLoading({ ...loading, signIn: false });
         });
     }
   };
@@ -75,7 +90,7 @@ function AuthComponent() {
         <h1>Sign In</h1>
         {error && <p className={classes.error}>{error}</p>} 
 
-        <form onSubmit={authHandler}>
+        <form onSubmit={authHandler} name='signin'>
           <div>
             <label htmlFor='email'>Email</label>
             <input 
@@ -98,7 +113,7 @@ function AuthComponent() {
           </div>
           <button 
             type='submit' 
-            name='signin' // This correctly indicates the action
+            name='signin' 
             className={classes.login_signInButton}
           >
             {loading.signIn ? (
@@ -116,9 +131,9 @@ function AuthComponent() {
         </p>
 
         <button 
-          type='button' // Prevent form submission
-          name='signup' // Correctly set to 'signup'
-          onClick={authHandler} // Call authHandler on click
+          type='button' 
+          name='signup' 
+          onClick={authHandler} 
           className={classes.login_registerButton}
         >
           {loading.signUp ? (
