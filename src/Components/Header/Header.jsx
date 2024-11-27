@@ -15,7 +15,7 @@ const Header = () => {
   // Declare searchTerm state
   const [searchTerm, setSearchTerm] = useState('');
   
-  const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0);
+  const totalItem = basket?.reduce((amount, item) => amount + item.amount, 0) || 0;
 
   const handleSearch = (event) => {
     event.preventDefault();

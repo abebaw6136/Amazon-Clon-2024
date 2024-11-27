@@ -7,7 +7,13 @@ import Orders from './Pages/Orders/Orders';
 import Cart from './Pages/Cart/Cart';
 import Results from './Pages/Results/Results';
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
 //import NotFound from './Pages/NotFound/NotFound'; // Import your NotFound component
+
+const stripePromise = loadStripe(
+  "pk_test_51QNyTpCl7luOPxoahC6CDF2dWeSyxGdj6zNgHQmANJo5x5KOhfXrgJRRwHPoz4CyKq1l1S0IeYaKcRmqQI5HaSNF00UHHHWvBZ");
 
 function Routing() {
   return (
@@ -15,7 +21,11 @@ function Routing() {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/auth' element={<Auth />} />
-        <Route path='/payments' element={<Payment />} />
+        <Route path='/payments' element={
+          <Elements stripe={stripePromise} >
+        <Payment />
+        </Elements>
+         }/>
         <Route path='/orders' element={<Orders />} />
         <Route path='/category/:categoryName' element={<Results />} />
         <Route path='/products/:productId' element={<ProductDetail />} />

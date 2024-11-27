@@ -1,8 +1,8 @@
 
-import React, { useEffect, useState } from 'react'; // Ensure these are at the top
+import React, { useEffect, useState } from 'react'; 
 import axios from 'axios';
-import ProductCard from './ProductCard'; // Ensure this path is correct
-import classes from './Product.module.css'; // Ensure this path is correct
+import ProductCard from './ProductCard'; 
+import classes from './Product.module.css'; 
 
 function Product() {
     const [products, setProducts] = useState([]); // Initialize as an empty array
