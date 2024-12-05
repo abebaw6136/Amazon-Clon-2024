@@ -1,5 +1,5 @@
 {
-  "name": "amzon-clon-2024",
+  "name": "amazon-clone-2024",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,7 +12,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.7.7",
+    "axios": "^1.7.8",
     "firebase": "^11.0.2",
     "numeral": "^2.0.6",
     "react": "^18.3.1",
@@ -63,7 +63,6 @@
   "keywords": [
     "react",
     "create-react-app",
-
     "web-app"
   ],
   "author": "Abebaw",
