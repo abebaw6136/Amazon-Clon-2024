@@ -10,7 +10,7 @@
     width: 100px;
 
 }
-.login_container {
+.login__container {
     width: 350px;
     display: flex;
     flex-direction: column;
@@ -19,18 +19,18 @@
     padding: 20px;
 }
 
-.login_container form{
+.login__container form{
     display: flex;
     flex-direction: column;
     gap: 10px;
 
 }
-.login_container form div {
+.login__container form div {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.login_container form input {
+.login__container form input {
     margin-bottom: 10px;
     padding: 8px 16px;
     background-color: white;
@@ -40,12 +40,12 @@
     border-radius: 3px;
     box-sizing: border-box;
 }
-.login_container form input:focus{
+.login__container form input:focus{
     outline: 2px solid skyblue;
 
 }
 
-.login_signInButton{
+.login__signInButton{
     border: none;
     background:  #f0c14b;
     border-radius: 5px;
@@ -55,15 +55,15 @@
     cursor: pointer;
     
 }
-.login_signInButton:hover{
+.login__signInButton:hover{
     background-color: var(---primary-shade);
 }
 
-.login_container p{
+.login__container p{
     padding: 10px 0px;
     font-size: 14px;
 }
-.login_registerButton{
+.login__registerButton{
     border: none;
     border-radius: 5px;
     width: 100%;
@@ -73,6 +73,6 @@
     
 
 }
-.login_registerButton:hover{
+.login__registerButton:hover{
     background-color: lightgray;
 }

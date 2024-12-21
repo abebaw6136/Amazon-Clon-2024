@@ -20,7 +20,7 @@ const Header = () => {
   const handleSearch = (event) => {
     event.preventDefault();
     // Implement search logic here, e.g., redirect to a search results page
-    console.log('Search Term:', searchTerm);
+    //console.log('Search Term:', searchTerm);
   };
 
   return (

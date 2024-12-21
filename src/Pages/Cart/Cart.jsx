@@ -6,7 +6,7 @@ import ProductCard from '../../Components/Product/ProductCard';
 import CurrencyFormat from '../../Components/CurrencyFormat/CurrencyFormat';
 import { Link } from 'react-router-dom';
 import { type } from '../../Utility/action.type';
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp, IoMdPhonePortrait } from "react-icons/io";
 
 function Cart() {
   const [{ basket, user }, dispatch] = useContext(DataContext);

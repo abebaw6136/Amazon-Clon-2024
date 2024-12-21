@@ -10,8 +10,12 @@ import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase";
 import { useNavigate } from "react-router-dom";
 
-const Payment = () => {
-  const [{ user, basket }] = useContext(DataContext);
+const Type = {
+  EMPTY_BASKET: 'EMPTY_BASKET'
+};
+
+function Payment() {
+  const [{ user, basket }, dispatch] = useContext(DataContext);
   const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0) || 0;
   const total = basket?.reduce((amount, item) => item.price * item.amount + amount, 0) || 0;
 
@@ -40,27 +44,21 @@ const Payment = () => {
       });
 
       if (error) {
-        // Handle error from Stripe
-        setCardError(error.message);
-        setProcessing(false);
+        setCardError(error.message || "An unexpected error occurred.");
         return; // Exit the function if there's an error
       }
 
       // Save the paymentIntent to the database
-      await db
-      .collection("users")
-      .doc(user.uid)
-      .collection("orders")
-      .doc(paymentIntent.id)
-      .set({
+      await db.collection("users").doc(user.uid).collection("Orders").doc(paymentIntent.id).set({
         basket: basket,
         amount: paymentIntent.amount,
         created: paymentIntent.created,
       });
+      
+      dispatch({ type: Type.EMPTY_BASKET });
 
       // Navigate to the orders page
-      setProcessing(false);
-      navigate("/orders", { state: { msg: "You have placed a new order" } });
+      navigate("/Orders", { state: { msg: "You have placed a new order" } });
 
     } catch (error) {
       console.error("Payment error:", error);
@@ -126,6 +124,6 @@ const Payment = () => {
       </section>
     </LayOut>
   );
-};
+}
 
 export default Payment;

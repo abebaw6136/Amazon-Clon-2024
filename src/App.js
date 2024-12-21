@@ -5,7 +5,7 @@ import { auth } from "./Utility/firebase";
 import { type } from "./Utility/action.type";
 
 function App() {
-    const [{ user}, dispatch] = useContext(DataContext);
+    const [{user}, dispatch] = useContext(DataContext);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {

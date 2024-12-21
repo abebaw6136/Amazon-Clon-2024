@@ -6,11 +6,11 @@
 }
 
 .container img {
-    width: 100px !important; /* Consider removing !important if not necessary */
+    width: 100px; /* Remove !important */
 }
 
 .container div {
-    height: auto !important; /* Consider removing !important if not necessary */
+    height: auto; /* Remove !important */
 }
 
 .cart_product {
@@ -26,13 +26,6 @@
     gap: 5px;
 }
 
-.btn_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-}
 .btn {
     padding: 5px 16px;
     font-weight: bold;
@@ -42,17 +35,13 @@
     transition: background-color 0.3s; 
 }
 
-.container div:not(.subtotal){
-    height:auto !important
-}
-
 .btn:hover {
     background-color: var(--primary-color);
 }
 
 .cart_container {
     padding: 20px;
-    margin-top: 100px; /* Adjust this value to create space below the lower header */
+    margin-top: 100px; /* Space below the lower header */
 }
 
 .cart_container h2,
@@ -64,27 +53,20 @@
     margin: 10px;
 }
 
-
 .subtotal {
-    z-index: 1000; /* Ensure it's above the lower header */
-    margin-top: 80px; /* Adjust based on the height of your headers */
-    
+    z-index: 100; /* Ensure it's above other elements */
+    margin-top: 80px; /* Space based on header height */
     padding: 20px;
     min-width: 300px;
-    height: 80%; /* Corrected from 'outo' */
+    height: auto; /* Changed from '80%' */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    border: 1px solid rgb(193, 193, 193); /* Fixed spacing */
-    background-color: rgb(224, 241, 241); /* Fixed spacing */
+    border: 1px solid rgb(193, 193, 193);
+    background-color: rgb(224, 241, 241);
     border-radius: 5px;
-    margin-top: 20px; /* Added margin to ensure space above */
-    /*opacity: 1 !important; /* Ensure it's fully opaque */
-    
 }
-
-
 
 .subtotal a {
     text-align: center;
@@ -99,7 +81,7 @@
 }
 
 .subtotal a:hover {
-    background: darken(var(--primary-color), 10%); /* Ensure this works with your preprocessor */
+    background-color: darken(var(--primary-color), 10%); /* Ensure this works with your preprocessor */
 }
 
 .subtotal > div,
@@ -108,12 +90,9 @@
     gap: 20px;
 }
 
-
-
 /* Responsive Styles */
-@media screen and (max-width: 768px) { /* Specify a max-width value */
+@media screen and (max-width: 768px) {
     .container {
         flex-direction: column; /* Stack items vertically */
-        order: 1;
     }
 }

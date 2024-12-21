@@ -1,7 +1,7 @@
 
 .category {
     height: 350px;
-    width: 250px;
+    width: 350px;
     background-color: white;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
    
@@ -40,8 +40,38 @@
     position: relative;
     margin-top: -10%; 
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 1600px;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
     place-items: center;
-    gap: 16px;
+   
+}
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .category {
+        max-width: 90%; /* Make it wider on smaller screens */
+        height: auto; /* Allow height to adjust */
+    }
+
+    .category_container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* More items per row */
+        gap: 15px; /* Smaller gap */
+    }
 }
 
+@media (max-width: 480px) {
+    .category {
+        max-width: 100%; /* Full width on very small screens */
+    }
+
+    .category p {
+        font-size: 10px; /* Smaller text for mobile */
+    }
+
+    .category_container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Stack items */
+        gap: 10px; /* Further reduce gap */
+    }
+}
