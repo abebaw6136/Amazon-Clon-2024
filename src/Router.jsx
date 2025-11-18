@@ -15,10 +15,12 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 function Routing() {
   const [stripe, setStripe] = useState(null);
+  const [stripeError, setStripeError] = useState(null);
 
   useEffect(() => {
     loadStripe("pk_test_51QNyTpCl7luOPxoahC6CDF2dWeSyxGdj6zNgHQmANJo5x5KOhfXrgJRRwHPoz4CyKq1l1S0IeYaKcRmqQI5HaSNF00UHHHWvBZ").then(setStripe).catch((error) => {
       console.error("Failed to load Stripe.js", error);
+      setStripeError("Failed to load payment system. Please check your internet connection or contact support.");
     });
   }, []);
 
@@ -34,9 +36,19 @@ function Routing() {
            msg={"you must log in to pay"}
           redirect={"/payments"}
           >
-            {stripe && <Elements stripe={stripe} >
-        <Payment />
-        </Elements>}
+            {stripe ? (
+              <Elements stripe={stripe}>
+                <Payment />
+              </Elements>
+            ) : stripeError ? (
+              <div style={{ padding: "20px", textAlign: "center" }}>
+                <h2>Payment System Error</h2>
+                <p>{stripeError}</p>
+                <button onClick={() => window.location.reload()}>Retry</button>
+              </div>
+            ) : (
+              <div style={{ padding: "20px", textAlign: "center" }}>Loading payment system...</div>
+            )}
           </ProtectedRoute>
 
          }
