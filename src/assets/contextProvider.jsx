@@ -10,7 +10,7 @@ const colorContext = createContext()
   const [color,setcolor]= useState('light');
 
   const  colorToggler =()=>{
-    setcolor((pre)=>per==='light'?'dark':'light')
+    setcolor((pre)=>pre==='light'?'dark':'light')
   };
    return (
     <colorContext.Provider value={{color,colorToggler}}>

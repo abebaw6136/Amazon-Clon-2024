@@ -5,7 +5,7 @@ import {DataContext} from '../DataProvider/DataProvider'
 
 
 
-const ProtectedRoute = ({childern,msg,redirect}) =>{
+const ProtectedRoute = ({children,msg,redirect}) =>{
     const navigate = useNavigate()
     const [{user}, dispatch]= useContext(DataContext)
 
@@ -16,6 +16,6 @@ const ProtectedRoute = ({childern,msg,redirect}) =>{
 
     },[user]);
 
-    return childern;
+    return children;
 }
 export default ProtectedRoute;

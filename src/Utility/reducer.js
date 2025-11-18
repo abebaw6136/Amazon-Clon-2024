@@ -47,8 +47,7 @@ export const reducer = (state, action) => {
          case type.EMPTY_BASKET:
             return{
                 ...state,
-                basket: newBasket,
-                basket:[]
+                basket: []
             };
         case type.SET_USER: {
             return {

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { SlLocationPin } from 'react-icons/sl';
 import { BsSearch } from 'react-icons/bs';
 import { BiCart } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LowerHeader from './LowerHeader';
 import classes from './Header.module.css';
 import { DataContext } from '../DataProvider/DataProvider';
@@ -11,16 +11,18 @@ import { auth } from '../../Utility/firebase';
 
 const Header = () => {
   const [{ user, basket }] = useContext(DataContext);
-  
+  const navigate = useNavigate();
+
   // Declare searchTerm state
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const totalItem = basket?.reduce((amount, item) => amount + item.amount, 0) || 0;
 
   const handleSearch = (event) => {
     event.preventDefault();
-    // Implement search logic here, e.g., redirect to a search results page
-    //console.log('Search Term:', searchTerm);
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    }
   };
 
   return (

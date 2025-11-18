@@ -3,6 +3,7 @@ import LayOut from '../../Components/LayOut/LayOut';
 import classes from './Orders.module.css';
 import { DataContext } from '../../Components/DataProvider/DataProvider';
 import { db } from '../../Utility/firebase';
+import { collection, doc, query, orderBy, onSnapshot } from 'firebase/firestore';
 import ProductCard from '../../Components/Product/ProductCard';
 
 function Orders() {
@@ -13,26 +14,24 @@ function Orders() {
 
   useEffect(() => {
     if (user) {
-      const unsubscribe = db.collection("users")
-        .doc(user.uid)
-        .collection("Orders")
-        .orderBy("created", "desc")
-        .onSnapshot(
-          (snapshot) => {
-            setOrders(
-              snapshot.docs.map((doc) => ({
-                id: doc.id,
-                data: doc.data()
-              }))
-            );
-            setLoading(false);
-          },
-          (error) => {
-           
-            setError(error.message);
-            setLoading(false);
-          }
-        );
+      const ordersRef = collection(db, "users", user.uid, "Orders");
+      const q = query(ordersRef, orderBy("created", "desc"));
+      const unsubscribe = onSnapshot(q,
+        (snapshot) => {
+          setOrders(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data()
+            }))
+          );
+          setLoading(false);
+        },
+        (error) => {
+
+          setError(error.message);
+          setLoading(false);
+        }
+      );
 
       // Cleanup subscription on unmount
       return () => unsubscribe();
@@ -51,7 +50,7 @@ function Orders() {
       <section className={classes.container}> 
         <div className="Orders__container"> 
           <h2>Your Orders</h2>
-          {Orders?.length == 0 && (
+          {Orders?.length === 0 && (
           <div style={{padding:"20px"}}>You don't have orders yet.
            </div>
            )}

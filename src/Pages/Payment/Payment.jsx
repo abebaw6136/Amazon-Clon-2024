@@ -8,11 +8,9 @@ import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
 import { axiosInstance } from "../../Api/axios";
 import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-
-const Type = {
-  EMPTY_BASKET: 'EMPTY_BASKET'
-};
+import { type } from "../../Utility/action.type";
 
 function Payment() {
   const [{ user, basket }, dispatch] = useContext(DataContext);
@@ -49,16 +47,17 @@ function Payment() {
       }
 
       // Save the paymentIntent to the database
-      await db.collection("users").doc(user.uid).collection("Orders").doc(paymentIntent.id).set({
+      const ordersRef = collection(db, "users", user.uid, "Orders");
+      await setDoc(doc(ordersRef, paymentIntent.id), {
         basket: basket,
         amount: paymentIntent.amount,
         created: paymentIntent.created,
       });
       
-      dispatch({ type: Type.EMPTY_BASKET });
+      dispatch({ type: type.EMPTY_BASKET });
 
       // Navigate to the orders page
-      navigate("/Orders", { state: { msg: "You have placed a new order" } });
+      navigate("/orders", { state: { msg: "You have placed a new order" } });
 
     } catch (error) {
       console.error("Payment error:", error);

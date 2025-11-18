@@ -34,7 +34,7 @@
     left: 0;
 }
 .button:hover {
-    background-color: var(--primary-shade);
+    background-color: #e6b800;
 }
 
 .rating {

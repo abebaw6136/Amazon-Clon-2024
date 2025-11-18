@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import classes from './Results.module.css';
 import LayOut from '../../Components/LayOut/LayOut';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { productUrl } from '../../Api/endPoints';
 import ProductCard from '../../Components/Product/ProductCard';
@@ -12,34 +12,75 @@ import Loader from '../../Components/Loader/Loader'; // Ensure this path is corr
 
 function Results() {
   const { CategoryName } = useParams();
+  const location = useLocation();
   const [results, setResults] = useState([]); // State for storing results
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const [title, setTitle] = useState('Results');
 
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get('q');
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get(`${productUrl}/products/category/${CategoryName}`)
-      .then((res) => {
-        
-        setResults(res.data || []); 
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Failed to fetch products.");
-        setResults([]); // Prevent undefined
-        setIsLoading(false);
-      });
-  }, [CategoryName]);
+    setError(null);
+
+    if (searchQuery) {
+      // Search by query
+      setTitle(`Search Results for "${searchQuery}"`);
+      axios.get(`${productUrl}/products`)
+        .then((res) => {
+          const allProducts = res.data || [];
+          const filteredProducts = allProducts.filter(product =>
+            product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.category.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setResults(filteredProducts);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError("Failed to fetch products.");
+          setResults([]);
+          setIsLoading(false);
+        });
+    } else if (CategoryName) {
+      // Category filter
+      setTitle(`Category: ${CategoryName}`);
+      axios.get(`${productUrl}/products/category/${CategoryName}`)
+        .then((res) => {
+          setResults(res.data || []);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError("Failed to fetch products.");
+          setResults([]);
+          setIsLoading(false);
+        });
+    } else {
+      // No query or category, show all products
+      setTitle('All Products');
+      axios.get(`${productUrl}/products`)
+        .then((res) => {
+          setResults(res.data || []);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError("Failed to fetch products.");
+          setResults([]);
+          setIsLoading(false);
+        });
+    }
+  }, [CategoryName, searchQuery]);
 
 
   return (
     <LayOut>
       <section>
-        <h1 style={{ padding: "30px" }}>Results</h1>
-        <p style={{ padding: "30px" }}>Category: {CategoryName}</p>
+        <h1 style={{ padding: "30px" }}>{title}</h1>
         <hr />
         {isLoading ? (
           <Loader /> // Correct loader component syntax
@@ -53,7 +94,7 @@ function Results() {
                   key={product.id}
                   product={product}
                   renderDesc={false}
-                  renderAdd={true}
+                    renderADD
                 />
               ))
             ) : (

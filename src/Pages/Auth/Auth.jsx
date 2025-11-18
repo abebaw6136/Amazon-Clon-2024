@@ -8,7 +8,7 @@ import { ClipLoader } from 'react-spinners';
 import { DataContext } from '../../Components/DataProvider/DataProvider';
 import { type } from '../../Utility/action.type';
 
-function Auth() { 
+function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,92 +20,92 @@ function Auth() {
 
   const authHandler = async (e) => {
     e.preventDefault();
-    
+
     const actionType = e.target.name;
     setError("");
 
 
     if ( e.target.name === 'signIn') {
-       
-       
+
+
 
       setLoading({ ...loading, signIn: true });
       signInWithEmailAndPassword(auth, email, password)
         .then((userInfo)=> {
-         dispatch({ 
-          type: type.SET_USER, 
-          user: userInfo.user, 
+         dispatch({
+          type: type.SET_USER,
+          user: userInfo.user,
         });
         setLoading({ ...loading, signIn: false });
-          navigate(navStateData?.state?.redirect ||"/"); 
+          navigate(navStateData?.state?.redirect ||"/");
         })
         .catch((error) => {
           setError(error.message);
           setLoading({ ...loading, signIn: false });
         });
-      
-    } else{ 
-      setLoading({ ...loading, signUP: true });
+
+    } else{
+      setLoading({ ...loading, signUp: true });
       createUserWithEmailAndPassword(auth,email,password)
       .then((userInfo) => {
         dispatch({
            type: type.SET_USER,
             user: userInfo.user,
           });
-          setLoading({ ...loading, signUP: false });
-          navigate(navStateData?.state?.redirect ||"/"); 
+          setLoading({ ...loading, signUp: false });
+          navigate(navStateData?.state?.redirect ||"/");
       })
       .catch((error) => {
         setError(error.message);
-        setLoading({ ...loading, signUP: false });
+        setLoading({ ...loading, signUp: false });
       });
 
 
       }
 
-      
-      
+
+
   };
 
   return (
     <section className={classes.login}>
       <Helmet>
-        <link rel="stylesheet" href="your-stylesheet-url.css" /> 
+        <link rel="stylesheet" href="your-stylesheet-url.css" />
       </Helmet>
 
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
-        alt="Amazon Web Services Logo"
+        src="https://pngimg.com/uploads/amazon/small/amazon_PNG11.png"
+        alt="Amazon Logo"
       />
 
       <div className={classes.login__container}>
         <h1>Sign In</h1>
-        {error && <p className={classes.error}>{error}</p>} 
+        {error && <p className={classes.error}>{error}</p>}
 
         <form onSubmit={authHandler} name='signIn'>
           <div>
             <label htmlFor='email'>Email</label>
-            <input 
-              value={email} 
+            <input
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
-              type="email" 
-              id='email' 
-              required 
+              type="email"
+              id='email'
+              required
             />
           </div>
           <div>
             <label htmlFor='password'>Password</label>
-            <input 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
-              type='password' 
-              id='password' 
-              required 
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type='password'
+              id='password'
+              required
             />
           </div>
-          <button 
-            type='submit' 
-            name='signIn' 
+          <button
+            type='submit'
+            name='signIn'
             className={classes.login__signInButton}
           >
             {loading.signIn ? (
@@ -122,10 +122,10 @@ function Auth() {
           </label>
         </p>
 
-        <button 
-          type='button' 
-          name='signUP' 
-          onClick={authHandler} 
+        <button
+          type='button'
+          name='signUp'
+          onClick={authHandler}
           className={classes.login__registerButton}
         >
           {loading.signUp ? (
