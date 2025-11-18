@@ -48,6 +48,7 @@ function ProductDetail() {
                     product={product}
                     flex={true}
                     renderDesc={true}
+                    renderADD={true}
                 />
             ) : (
                 <p>Product not found.</p>
