@@ -1,41 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { SlLocationPin } from 'react-icons/sl';
-import { BsSearch } from 'react-icons/bs';
-import { BiCart } from 'react-icons/bi';
-import { Link, useNavigate } from 'react-router-dom';
-import LowerHeader from './LowerHeader';
+import { BsSearch } from '@react-icons/all-files/bs/BsSearch';
+import { BiCart } from '@react-icons/all-files/bi/BiCart';
+import { Link } from 'react-router-dom'; // Import Link
+import LowerHeader from './LowerHeader'; // Ensure the import is correct
 import classes from './Header.module.css';
-import { DataContext } from '../DataProvider/DataProvider';
-import { auth } from '../../Utility/firebase';
-
 
 const Header = () => {
-  const [{ user, basket }] = useContext(DataContext);
-  const navigate = useNavigate();
-
-  // Declare searchTerm state
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const totalItem = basket?.reduce((amount, item) => amount + item.amount, 0) || 0;
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-    }
-  };
-
   return (
-    <section className={classes.fixed}>
+    <>
       <section>
         <div className={classes.header_container}>
+          {/* Logo Section */}
           <div className={classes.logo_container}>
-            <Link to='/'>
+            <Link to='/'> {/* Changed to Link */}
               <img
                 src='https://pngimg.com/uploads/amazon/small/amazon_PNG11.png'
-                alt='amazon logo'/>
+                alt='amazon logo'
+              />
             </Link>
-
             <span className={classes.location_icon}>
               <SlLocationPin />
             </span>
@@ -45,58 +28,47 @@ const Header = () => {
             </div>
           </div>
       
-          <form className={classes.search} onSubmit={handleSearch}>
+          {/* Search Bar */}
+          <div className={classes.search}>
             <select name='' id=''>
               <option value="">All</option>
             </select>
-            <input
-              type="text"
-              placeholder='Search products'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm state
-            />
-            <button type="submit" aria-label="Search">
-              <BsSearch size={20} />
+            <input type="text" placeholder='Search products' />
+            <button type="submit">
+              <BsSearch size={25} />
             </button>
-          </form>
-
-          <div className={classes.order_container}>
-            <Link to='' className={classes.language}>
-              <img
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg/383px-Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg.png'
-                alt='US flag' />
-              <select name="" id="">
-                <option value=''>EN</option>
-              </select>
-            </Link>
-            <Link to={!user && '/auth'}>
-              <div>
-                {user ? (
-                  <>
-                    <p>{user?.email?.split("@")[0]}</p>
-                    <span onClick={() => auth.signOut()}>Sign Out</span>
-                  </>
-                ) : (
-                  <>
-                    <p>Hello, Sign In</p>
-                    <span>Account & Lists</span>
-                  </>
-                )}
-              </div>
-            </Link>
-            <Link to='/orders'>
-              <p>Returns</p>
-              <span>& Orders</span>
-            </Link>
-            <Link to='/cart' className={classes.Cart}>
-              <BiCart size={35} />
-              <span>{totalItem}</span>
-            </Link>
           </div>
+
+          {/* Right Side Links */}
+          <div className={classes.order_container}>
+            <>
+              <Link to='' className={classes.language}> {/* Changed to Link */}
+                <img
+                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg/383px-Flag_of_the_United_States_%28DoS_ECA_Color_Standard%29.svg.png'
+                  alt='' />
+                <select name="" id="">
+                  <option value=''>EN</option>
+                </select>
+              </Link>
+              <Link to='/signin'> {/* Changed to Link */}
+                <p>Sign In</p>
+                <span>Account & Lists</span>
+              </Link>
+              <Link to='/orders'> {/* Changed to Link */}
+                <p>Returns</p>
+                <span>& Orders</span>
+              </Link>
+              <Link to='/cart' className={classes.Cart}> {/* Changed to Link */}
+                <BiCart size={35} />
+                <span className={classes.cart_count}>0</span>
+              </Link>
+            </>
+          </div> 
         </div>
+        <div></div>
       </section>
       <LowerHeader />
-    </section>
+    </>
   );
 }
 

@@ -18,9 +18,9 @@ function ProductDetail() {
         const fetchProduct = async () => {
             setIsLoading(true);
             try {
-                
+                console.log("Fetching product with ID:", productId);
                 const response = await axios.get(`${productUrl}/products/${productId}`);
-               
+                console.log("API Response:", response.data); // Log the response data
                 if (response.data && response.data.id) {
                     setProduct(response.data);
                 } else {
@@ -48,7 +48,6 @@ function ProductDetail() {
                     product={product}
                     flex={true}
                     renderDesc={true}
-                    renderADD={true}
                 />
             ) : (
                 <p>Product not found.</p>

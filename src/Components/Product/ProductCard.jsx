@@ -6,23 +6,17 @@ import { Link } from 'react-router-dom';
 import { DataContext } from '../DataProvider/DataProvider';
 import { type } from '../../Utility/action.type';
 
-
 function ProductCard({ product, flex, renderDesc, renderADD }) {
     const { image, title, id, rating, price, description } = product; // Consistent casing
     const [state, dispatch] = useContext(DataContext);
 
     function addToCart() {
-        const existingItem = state.basket.find(item => item.id === id);
-        if (existingItem) {
-            // Optionally, you can update the quantity here
-        } else {
-            dispatch({
-                type: type.ADD_TO_BASKET,
-                item: {
-                    image, title, id, rating, price, description
-                },
-            });
-        }
+        dispatch({
+            type: type.ADD_TO_BASKET,
+            item: {
+                image, title, id, rating, price, description
+            },
+        });
     }
 
     return (

@@ -1,5 +1,3 @@
-
-
 import React, { createContext, useReducer, useMemo } from 'react';
 import { reducer, initialState } from '../../Utility/reducer';
 import { type } from '../../Utility/action.type';

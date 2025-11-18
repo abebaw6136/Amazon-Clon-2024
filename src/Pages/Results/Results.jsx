@@ -48,7 +48,7 @@ function Results() {
     } else if (CategoryName) {
       // Category filter
       setTitle(`Category: ${CategoryName}`);
-      axios.get(`${productUrl}/products/category/${CategoryName}`)
+      axios.get(`${productUrl}/products/category/${encodeURIComponent(CategoryName)}`)
         .then((res) => {
           setResults(res.data || []);
           setIsLoading(false);
@@ -94,7 +94,7 @@ function Results() {
                   key={product.id}
                   product={product}
                   renderDesc={false}
-                    renderADD
+                  renderADD={true}
                 />
               ))
             ) : (

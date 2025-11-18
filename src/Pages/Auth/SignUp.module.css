@@ -7,7 +7,7 @@
 .login img {
     margin: 30px auto;
     object-fit: contain;
-    width: 150px;
+    width: 100px;
 
 }
 .login__container {
@@ -56,7 +56,7 @@
 
 }
 .login__signInButton:hover{
-    background-color: #e6b800;
+    background-color: var(---primary-shade);
 }
 
 .login__container p{
@@ -70,7 +70,7 @@
     height: 30px;
     margin-top: 10px;
     cursor: pointer;
-    
+
 
 }
 .login__registerButton:hover{

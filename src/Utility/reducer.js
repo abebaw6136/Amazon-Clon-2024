@@ -1,7 +1,7 @@
 import { type } from './action.type';
 
 export const initialState = {
-    basket: [], 
+    basket: [],
     user: null,
 };
 
@@ -27,7 +27,7 @@ export const reducer = (state, action) => {
                 basket: newBasket,
             };
         }
-        
+
         case type.REMOVE_FROM_BASKET: {
             const index = state.basket.findIndex(item => item.id === action.id);
             let newBasket = [...state.basket];
@@ -56,7 +56,7 @@ export const reducer = (state, action) => {
             };
         }
 
-        default: 
+        default:
             return state; // Ensure default case returns current state
     }
 };

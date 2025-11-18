@@ -1,14 +1,13 @@
 
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; // Ensure these are at the top
 import axios from 'axios';
-import ProductCard from './ProductCard'; 
-import classes from './Product.module.css'; 
+import ProductCard from './ProductCard'; // Ensure this path is correct
+import classes from './Product.module.css'; // Ensure this path is correct
 
 function Product() {
     const [products, setProducts] = useState([]); // Initialize as an empty array
     const [loading, setLoading] = useState(true); // Loading state
     const [error, setError] = useState(null); // Error state
-    
 
     useEffect(() => {
         axios.get("https://fakestoreapi.com/products")
@@ -33,11 +32,9 @@ function Product() {
 
     return (
         <section className={classes.products_container}>
-            {
-            products.map(singleProduct => (
-                <ProductCard renderADD={true} product={singleProduct} key={singleProduct.id} />
+            {products.map(singleProduct => (
+                <ProductCard product={singleProduct} key={singleProduct.id} />
             ))}
-
         </section>
     );
 }

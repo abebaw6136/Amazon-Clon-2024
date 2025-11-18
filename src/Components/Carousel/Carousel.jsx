@@ -1,30 +1,20 @@
 import React from 'react';
-import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel';
+import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel'; // Import the carousel component
 import { img } from './img/data'; // Import images data
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import classes from './Carousel.module.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
 function Carousel() {
     return (
-        <div className={classes.carouselContainer}>
+        <div>
             <ResponsiveCarousel
                 autoPlay={true}
                 infiniteLoop={true}
                 showIndicators={true}
                 showThumbs={false}
-                showStatus={false}
-                interval={3000}
             >
                 {
-                    img.map((imageItemLink) => (
-                        <div className={classes.hero_img} key={imageItemLink}>
-                            <img
-                                src={imageItemLink}
-                                alt={`Image description for ${imageItemLink}`}
-                                onError={(e) => { e.target.src = 'path/to/fallback/image.jpg'; }}
-                            />
-                            <div className={classes.overlay}></div>
-                        </div>
+                    img.map((imageItemLink, index) => (
+                        <img src={imageItemLink} alt={`Slide ${index}`} key={index} />
                     ))
                 }
             </ResponsiveCarousel>

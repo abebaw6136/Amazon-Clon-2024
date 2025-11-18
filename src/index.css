@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     font-family: sans-serif;
-    box-sizing: border-box;
 }
 :root{
     --primary-color: #febd69;
@@ -14,19 +13,3 @@
     padding: 10px 0px;
     
 }
-
-
-
-.subtotal a {
-    text-align: center;
-    width: 100%;
-    border: none;
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    padding: 5px 10px;
-    text-decoration: none;
-    color: black;
-}
-    .subtotal a:hover {
-        background: var(--primary-color);
-    }

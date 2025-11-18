@@ -74,8 +74,8 @@ function Auth() {
       </Helmet>
 
       <img
-        src="https://pngimg.com/uploads/amazon/small/amazon_PNG11.png"
-        alt="Amazon Logo"
+        src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+        alt="Amazon Web Services Logo"
       />
 
       <div className={classes.login__container}>

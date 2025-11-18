@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './Pages/Landing/Landing';
 import Auth from './Pages/Auth/Auth';
@@ -13,27 +13,32 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 //import NotFound from './Pages/NotFound/NotFound'; // Import your NotFound component
 
-const stripePromise = loadStripe(
-  "pk_test_51QNyTpCl7luOPxoahC6CDF2dWeSyxGdj6zNgHQmANJo5x5KOhfXrgJRRwHPoz4CyKq1l1S0IeYaKcRmqQI5HaSNF00UHHHWvBZ");
-
 function Routing() {
+  const [stripe, setStripe] = useState(null);
+
+  useEffect(() => {
+    loadStripe("pk_test_51QNyTpCl7luOPxoahC6CDF2dWeSyxGdj6zNgHQmANJo5x5KOhfXrgJRRwHPoz4CyKq1l1S0IeYaKcRmqQI5HaSNF00UHHHWvBZ").then(setStripe).catch((error) => {
+      console.error("Failed to load Stripe.js", error);
+    });
+  }, []);
+
   return (
     <Router>
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/auth' element={<Auth />} />
-        <Route 
+        <Route
         path='/payments'
          element={
           <ProtectedRoute
            msg={"you must log in to pay"}
           redirect={"/payments"}
           >
-            <Elements stripe={stripePromise} >
+            {stripe && <Elements stripe={stripe} >
         <Payment />
-        </Elements>
+        </Elements>}
           </ProtectedRoute>
-          
+
          }
          />
          <Route
@@ -50,12 +55,12 @@ function Routing() {
          }
          />
 
-        
+
         <Route path='/category/:categoryName' element={<Results />} />
         <Route path='/search' element={<Results />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
         <Route path='/cart' element={<Cart />} />
-       
+
       </Routes>
     </Router>
   );
