@@ -1,17 +1,15 @@
-
 import React, { useEffect, useState } from 'react';
 import classes from './Results.module.css';
 import LayOut from '../../Components/LayOut/LayOut';
 import { useParams, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import { productUrl } from '../../Api/endPoints';
+import { axiosInstance } from '../../Api/axios';
 import ProductCard from '../../Components/Product/ProductCard';
 import Loader from '../../Components/Loader/Loader'; // Ensure this path is correct
 
 
 
 function Results() {
-  const { CategoryName } = useParams();
+  const { categoryName } = useParams();
   const location = useLocation();
   const [results, setResults] = useState([]); // State for storing results
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +26,7 @@ function Results() {
     if (searchQuery) {
       // Search by query
       setTitle(`Search Results for "${searchQuery}"`);
-      axios.get(`${productUrl}/products`)
+      axiosInstance.get('/products')
         .then((res) => {
           const allProducts = res.data || [];
           const filteredProducts = allProducts.filter(product =>
@@ -45,24 +43,37 @@ function Results() {
           setResults([]);
           setIsLoading(false);
         });
-    } else if (CategoryName) {
+    } else if (categoryName) {
       // Category filter
-      setTitle(`Category: ${CategoryName}`);
-      axios.get(`${productUrl}/products/category/${encodeURIComponent(CategoryName)}`)
+      setTitle(`Category: ${categoryName}`);
+      axiosInstance.get(`/products/category/${encodeURIComponent(categoryName)}`)
         .then((res) => {
           setResults(res.data || []);
           setIsLoading(false);
         })
         .catch((err) => {
           console.error(err);
-          setError("Failed to fetch products.");
-          setResults([]);
-          setIsLoading(false);
+          // Fallback: fetch all products and filter client-side
+          axiosInstance.get('/products')
+            .then((res) => {
+              const allProducts = res.data || [];
+              const filteredProducts = allProducts.filter(product =>
+                product.category.toLowerCase() === categoryName.toLowerCase()
+              );
+              setResults(filteredProducts);
+              setIsLoading(false);
+            })
+            .catch((fallbackErr) => {
+              console.error(fallbackErr);
+              setError("Failed to fetch products.");
+              setResults([]);
+              setIsLoading(false);
+            });
         });
     } else {
       // No query or category, show all products
       setTitle('All Products');
-      axios.get(`${productUrl}/products`)
+      axiosInstance.get('/products')
         .then((res) => {
           setResults(res.data || []);
           setIsLoading(false);
@@ -74,13 +85,14 @@ function Results() {
           setIsLoading(false);
         });
     }
-  }, [CategoryName, searchQuery]);
+  }, [categoryName, searchQuery]);
 
 
   return (
     <LayOut>
       <section>
         <h1 style={{ padding: "30px" }}>{title}</h1>
+        <p style={{ padding: "30px" }}>Category: {categoryName}</p>
         <hr />
         {isLoading ? (
           <Loader /> // Correct loader component syntax
@@ -94,7 +106,7 @@ function Results() {
                   key={product.id}
                   product={product}
                   renderDesc={false}
-                  renderADD={true}
+                  renderAdd={true}
                 />
               ))
             ) : (

@@ -7,7 +7,7 @@ export const CategoryFullinfos = [
         imgLink: "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
     },
     {
-        title: "Jewelery",
+        title: "Jewelry",
         name: "jewelery",
         imgLink: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
     },

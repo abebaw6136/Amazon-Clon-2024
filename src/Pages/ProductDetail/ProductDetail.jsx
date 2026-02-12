@@ -1,60 +1,50 @@
-
 import React, { useEffect, useState } from 'react';
-import classes from './ProductDetail.module.css';
-import LayOut from '../../Components/LayOut/LayOut';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { axiosInstance } from '../../Api/axios';
 import { productUrl } from '../../Api/endPoints';
+import LayOut from '../../Components/LayOut/LayOut';
 import ProductCard from '../../Components/Product/ProductCard';
-import Loader from '../../Components/Loader/Loader';
 
 function ProductDetail() {
-    const { productId } = useParams();
-    const [isLoading, setIsLoading] = useState(true);
-    const [product, setProduct] = useState(null);
-    const [error, setError] = useState(null);
+  const { productId } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchProduct = async () => {
-            setIsLoading(true);
-            try {
-                console.log("Fetching product with ID:", productId);
-                const response = await axios.get(`${productUrl}/products/${productId}`);
-                console.log("API Response:", response.data); // Log the response data
-                if (response.data && response.data.id) {
-                    setProduct(response.data);
-                } else {
-                    setError("Product data is not valid.");
-                }
-            } catch (err) {
-                console.error("Error fetching product:", err);
-                setError("Failed to fetch product details.");
-            } finally {
-                setIsLoading(false);
-            }
-        };
+  useEffect(() => {
+    axiosInstance.get(`${productUrl}/products/${productId}`)
+      .then((res) => {
+        setProduct(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("Failed to fetch product.");
+        setLoading(false);
+      });
+  }, [productId]);
 
-        fetchProduct();
-    }, [productId]);
-
+  if (loading) {
     return (
-        <LayOut>
-            {isLoading ? (
-                <Loader />
-            ) : error ? (
-                <p>{error}</p>
-            ) : product ? (
-                <ProductCard
-                    product={product}
-                    flex={false}
-                    renderDesc={true}
-                    renderADD={true}
-                />
-            ) : (
-                <p>Product not found.</p>
-            )}
-        </LayOut>
+      <LayOut>
+        <p>Loading...</p>
+      </LayOut>
     );
+  }
+
+  if (error) {
+    return (
+      <LayOut>
+        <p>{error}</p>
+      </LayOut>
+    );
+  }
+
+  return (
+    <LayOut>
+      <ProductCard product={product} renderAdd={true} flex={false} />
+    </LayOut>
+  );
 }
 
 export default ProductDetail;

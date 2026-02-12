@@ -1,28 +1,23 @@
-import React from 'react'
-import { IoIosMenu } from "react-icons/io";
-import classes from './Header.module.css';
+import React from 'react';
+import { IoIosMenu } from 'react-icons/io';
+import classes from './LowerHeader.module.css';
 
-
- function LowerHeader() {
+function LowerHeader() {
   return (
     <div className={classes.lower_container}>
-
-        <ul>
+      <ul>
         <li className={classes.menu_item}>
-          <IoIosMenu aria-label="Menu" />
-          <p>ALL</p>
+          <IoIosMenu size={25} />
+          <p>All</p>
         </li>
-            <li>Today's Deals</li>
-            <li>Costumer Service</li>
-            <li>Registry</li>
-            <li>Gift Cards</li>
-            <li>Sell</li>
-
-
-        </ul>
-
+        <li>Today's Deals</li>
+        <li>Customer Service</li> {/* Fixed Typo */}
+        <li>Registry</li>
+        <li>Gift Cards</li>
+        <li>Sell</li>
+      </ul>
     </div>
   )
 }
 
-export default  LowerHeader
+export default LowerHeader;

@@ -18,7 +18,12 @@ function Routing() {
   const [stripeError, setStripeError] = useState(null);
 
   useEffect(() => {
-    loadStripe("pk_test_51QNyTpCl7luOPxoahC6CDF2dWeSyxGdj6zNgHQmANJo5x5KOhfXrgJRRwHPoz4CyKq1l1S0IeYaKcRmqQI5HaSNF00UHHHWvBZ").then(setStripe).catch((error) => {
+    const stripeKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+    if (!stripeKey) {
+      setStripeError("Stripe publishable key not found. Please check your environment variables.");
+      return;
+    }
+    loadStripe(stripeKey).then(setStripe).catch((error) => {
       console.error("Failed to load Stripe.js", error);
       setStripeError("Failed to load payment system. Please check your internet connection or contact support.");
     });
