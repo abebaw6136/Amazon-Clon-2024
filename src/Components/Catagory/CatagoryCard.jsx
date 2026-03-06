@@ -13,7 +13,7 @@ function CatagoryCard({ data }) {
                     <h2>{data.title}</h2>
                 </span>
                 <img 
-                    className={classes.category_image} 
+                    className={classes.catagory_image} 
                     src={data.imgLink} 
                     alt={data.title} 
                 />

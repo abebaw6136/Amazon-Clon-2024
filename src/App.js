@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Routing from "./Router";
 import { DataContext } from "./Components/DataProvider/DataProvider";
 import { auth } from "./Utility/firebase";
@@ -27,7 +28,9 @@ function App() {
     }, [dispatch]);
 
     return (
-        <Routing />
+        <Router>
+            <Routing />
+        </Router>
     );
 }
 

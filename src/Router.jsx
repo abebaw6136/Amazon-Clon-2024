@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Landing from './Pages/Landing/Landing';
 import Auth from './Pages/Auth/Auth';
 import Payment from './Pages/Payment/Payment';
@@ -10,8 +10,20 @@ import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import LayOut from './Components/LayOut/LayOut';
 
-//import NotFound from './Pages/NotFound/NotFound'; // Import your NotFound component
+// Simple 404 NotFound component
+function NotFound() {
+  return (
+    <LayOut>
+      <div style={{ padding: '50px', textAlign: 'center' }}>
+        <h1>404 - Page Not Found</h1>
+        <p>The page you're looking for doesn't exist.</p>
+        <a href="/" style={{ color: '#007185', textDecoration: 'none' }}>Go to Home</a>
+      </div>
+    </LayOut>
+  );
+}
 
 function Routing() {
   const [stripe, setStripe] = useState(null);
@@ -30,16 +42,24 @@ function Routing() {
   }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/auth' element={<Auth />} />
-        <Route
+    <Routes>
+      {/* Public Routes - placed first */}
+      <Route path='/' element={<Landing />} />
+      <Route path='/auth' element={<Auth />} />
+      <Route path='/cart' element={<Cart />} />
+      <Route path='/search' element={<Results />} />
+      <Route path='/category/:categoryName' element={<Results />} />
+      
+      {/* Product Detail - specific route before dynamic routes */}
+      <Route path='/products/:productId' element={<ProductDetail />} />
+      
+      {/* Protected Routes */}
+      <Route
         path='/payments'
-         element={
+        element={
           <ProtectedRoute
-           msg={"you must log in to pay"}
-          redirect={"/payments"}
+            msg={"you must log in to pay"}
+            redirect={"/payments"}
           >
             {stripe ? (
               <Elements stripe={stripe}>
@@ -55,31 +75,26 @@ function Routing() {
               <div style={{ padding: "20px", textAlign: "center" }}>Loading payment system...</div>
             )}
           </ProtectedRoute>
-
-         }
-         />
-         <Route
+        }
+      />
+      <Route
         path='/orders'
-         element={
+        element={
           <ProtectedRoute
-           msg={"you must log in to access your orders"}
-          redirect={"/orders"}
+            msg={"you must log in to access your orders"}
+            redirect={"/orders"}
           >
-        <Orders />
-
+            <Orders />
           </ProtectedRoute>
-
-         }
-         />
-
-
-        <Route path='/category/:categoryName' element={<Results />} />
-        <Route path='/search' element={<Results />} />
-        <Route path='/products/:productId' element={<ProductDetail />} />
-        <Route path='/cart' element={<Cart />} />
-
-      </Routes>
-    </Router>
+        }
+      />
+      
+      {/* Redirect /payment to /payments for backward compatibility */}
+      <Route path='/payment' element={<Navigate to="/payments" replace />} />
+      
+      {/* Catch-all route for 404 - must be last */}
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 }
 

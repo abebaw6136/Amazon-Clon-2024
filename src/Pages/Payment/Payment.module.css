@@ -85,6 +85,20 @@
   font-size: 14px;
 }
 
+.checkout_container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.checkout_left {
+  flex: 2;
+}
+
+.checkout_right {
+  flex: 0 0 350px;
+}
+
 @media (max-width: 768px) {
   .flex {
     flex-direction: column;

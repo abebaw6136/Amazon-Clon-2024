@@ -40,5 +40,31 @@ app.post("/charge", async (req, res) => {
   }
 });
 
+// Endpoint for creating payment intent - called by frontend
+app.post("/payment/create", async (req, res) => {
+  const total = req.query.total;
+
+  if (total > 0) {
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: total,
+        currency: "usd",
+      });
+      res.status(201).json({
+        clientSecret: paymentIntent.client_secret,
+      });
+    } catch (error) {
+      logger.error("Error creating payment intent:", error);
+      res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
+  } else {
+    res.status(403).json({
+      message: "Total must be greater than 0",
+    });
+  }
+});
+
 // Export the Express app as a Cloud Function
 exports.api = onRequest(app);

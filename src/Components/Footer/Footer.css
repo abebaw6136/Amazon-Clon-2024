@@ -1,0 +1,137 @@
+.footer {
+  background-color: #232f3e;
+  color: white;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin-top: 40px;
+}
+
+/* Back to top button */
+.backToTop {
+  background-color: #37475a;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.backToTop:hover {
+  background-color: #485769;
+}
+
+/* Links Grid */
+.footerLinks {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 10px;
+  align-items: flex-start;
+}
+
+.footerColumn h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.footerColumn ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footerColumn ul li {
+  margin-bottom: 10px;
+}
+
+.footerColumn ul li a {
+  color: #DDD;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footerColumn ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Services Section */
+.footerServices {
+  background-color: #232f3e;
+  border-top: 1px solid #3a4553;
+  padding: 30px 0;
+}
+
+.servicesContent {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.serviceItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceItem a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+}
+
+.serviceItem a:hover {
+  text-decoration: underline;
+}
+
+.serviceName {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.serviceDescription {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Sub-footer (Logo & Copyright) */
+.footerSub {
+  background-color: #131a22;
+  border-top: 1px solid #3a4553;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.footerCopy {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* Responsive adjustment */
+@media (max-width: 1024px) {
+  .servicesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footerLinks {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footerColumn {
+    margin-bottom: 30px;
+  }
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
