@@ -11,6 +11,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import LayOut from './Components/LayOut/LayOut';
+import Product from './Components/Product/Product';
 
 // Simple 404 NotFound component
 function NotFound() {
@@ -48,7 +49,7 @@ function Routing() {
       <Route path='/auth' element={<Auth />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/search' element={<Results />} />
-      <Route path='/category/:categoryName' element={<Results />} />
+      <Route path='/category/:categoryName' element={<Product />} />
       
       {/* Product Detail - specific route before dynamic routes */}
       <Route path='/products/:productId' element={<ProductDetail />} />

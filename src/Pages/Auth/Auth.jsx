@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate, useLocation } from 'react-router-dom';
 import classes from './SignUp.module.css';
 import { auth } from '../../Utility/firebase'; // Correct import

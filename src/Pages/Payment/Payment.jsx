@@ -8,7 +8,7 @@ import CurrencyFormat from '../../Components/CurrencyFormat/CurrencyFormat';
 import { axiosPrivate } from '../../Api/axios';
 import { ClipLoader } from 'react-spinners';
 import { db } from '../../Utility/firebase';
-import { doc, setDoc, collection } from 'firebase/firestore';
+
 import { useNavigate } from 'react-router-dom';
 import { type } from '../../Utility/action.type';
 
@@ -54,7 +54,7 @@ function Payment() {
       });
 
       // Save order to Firestore
-      await setDoc(doc(collection(db, 'users', user.uid, 'orders'), paymentIntent.id), {
+      await db.collection('users', user.uid, 'orders').doc(paymentIntent.id).set({
         basket: basket,
         amount: paymentIntent.amount,
         created: paymentIntent.created,

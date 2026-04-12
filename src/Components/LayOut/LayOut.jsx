@@ -1,11 +1,9 @@
 import React from 'react'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer.js'
 
  function LayOut({children}) {
   return (
     <div>
-        <Header/>
         {children}
         <Footer />
     </div>
