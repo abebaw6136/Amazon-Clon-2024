@@ -4,14 +4,12 @@ import LayOut from '../../Components/LayOut/LayOut';
 import { useParams, useLocation } from 'react-router-dom';
 import { axiosInstance } from '../../Api/axios';
 import ProductCard from '../../Components/Product/ProductCard';
-import Loader from '../../Components/Loader/Loader'; // Ensure this path is correct
-
-
+import Loader from '../../Components/Loader/Loader'; 
 
 function Results() {
   const { categoryName } = useParams();
   const location = useLocation();
-  const [results, setResults] = useState([]); // State for storing results
+  const [results, setResults] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [title, setTitle] = useState('Results');
@@ -24,7 +22,6 @@ function Results() {
     setError(null);
 
     if (searchQuery) {
-      // Search by query
       setTitle(`Search Results for "${searchQuery}"`);
       axiosInstance.get('/products')
         .then((res) => {
@@ -44,7 +41,6 @@ function Results() {
           setIsLoading(false);
         });
     } else if (categoryName) {
-      // Category filter
       setTitle(`Category: ${categoryName}`);
       axiosInstance.get(`/products/category/${encodeURIComponent(categoryName)}`)
         .then((res) => {
@@ -53,7 +49,6 @@ function Results() {
         })
         .catch((err) => {
           console.error(err);
-          // Fallback: fetch all products and filter client-side
           axiosInstance.get('/products')
             .then((res) => {
               const allProducts = res.data || [];
@@ -71,7 +66,6 @@ function Results() {
             });
         });
     } else {
-      // No query or category, show all products
       setTitle('All Products');
       axiosInstance.get('/products')
         .then((res) => {
@@ -87,7 +81,6 @@ function Results() {
     }
   }, [categoryName, searchQuery]);
 
-
   return (
     <LayOut>
       <section>
@@ -95,12 +88,12 @@ function Results() {
         <p style={{ padding: "30px" }}>Category: {categoryName}</p>
         <hr />
         {isLoading ? (
-          <Loader /> // Correct loader component syntax
+          <Loader /> 
         ) : error ? (
-          <p>{error}</p> // Display error message if there is an error
+          <p>{error}</p> 
         ) : (
-          <div className={classes.products_container}>
-            {Array.isArray(results) && results.length > 0 ? ( // Check if results exist
+          <div className={classes.products_grid}>
+            {Array.isArray(results) && results.length > 0 ? (
               results.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -110,7 +103,7 @@ function Results() {
                 />
               ))
             ) : (
-              <p>No products found in this category.</p> // Message for no results
+              <p>No products found in this category.</p> 
             )}
           </div>
         )}

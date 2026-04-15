@@ -63,5 +63,12 @@
     "web-app"
   ],
   "author": "Abebaw",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abebaw6136/Amazon-Clon-2024.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abebaw6136/Amazon-Clon-2024/issues"
+  }
 }
