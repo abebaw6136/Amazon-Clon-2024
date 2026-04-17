@@ -49,7 +49,7 @@ function Routing() {
       <Route path='/auth' element={<Auth />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/search' element={<Results />} />
-      <Route path='/category/:categoryName' element={<Product />} />
+<Route path='/category/:categoryName' element={<Results />} />
       
       {/* Product Detail - specific route before dynamic routes */}
       <Route path='/products/:productId' element={<ProductDetail />} />

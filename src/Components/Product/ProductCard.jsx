@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CurrencyFormat from '../CurrencyFormat/CurrencyFormat';
+import { useContext } from 'react';
+import { DataContext, ADD_TO_BASKET } from '../DataProvider/DataProvider';
 import classes from './ProductCard.module.css';
 
 function ProductCard({ product, renderDesc = false, renderADD = true, flex = false }) {
+  const [{ basket }, dispatch] = useContext(DataContext);
   const { id, title, image, price, description, rating } = product;
 
   const handleImageError = (e) => {
@@ -46,7 +49,10 @@ function ProductCard({ product, renderDesc = false, renderADD = true, flex = fal
         </div>
         
         {renderADD && (
-          <button className={classes.add_button}>
+          <button 
+            className={classes.add_button}
+            onClick={() => dispatch({ type: ADD_TO_BASKET, item: product })}
+          >
             Add to Cart
           </button>
         )}

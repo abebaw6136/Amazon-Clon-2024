@@ -38,7 +38,7 @@ function ProductList({ title = 'Featured Products', limit = 12 }) {
               key={product.id}
               product={product}
               renderDesc={true}
-              renderAdd={true}
+renderADD={true}
             />
           ))}
         </div>
