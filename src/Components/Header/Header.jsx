@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { SlLocationPin } from 'react-icons/sl';
 import { BsSearch } from 'react-icons/bs';
 import { BiCart } from 'react-icons/bi';
@@ -14,6 +14,16 @@ const Header = () => {
 
   // Safely calculate total items
   const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0) || 0;
+
+  const [language, setLanguage] = useState('EN');
+
+  const languageOptions = [
+    { code: 'EN', label: 'EN', flag: 'https://hatrack.github.io/cdn/flag/us.svg' },
+    { code: 'PT', label: 'PT', flag: 'https://hatrack.github.io/cdn/flag/br.svg' },
+    { code: 'ES', label: 'ES', flag: 'https://hatrack.github.io/cdn/flag/es.svg' },
+  ];
+
+  const currentLang = languageOptions.find(l => l.code === language);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -57,9 +67,11 @@ const Header = () => {
         {/* Right Side Navigation */}
         <div className={classes.order_container}>
           <div className={classes.language}>
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1024px-Flag_of_the_United_States.svg.png" alt="flag" />
-            <select>
-                <option value="EN">EN</option>
+            <img src={currentLang.flag} alt={`${currentLang.code} flag`} />
+            <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+              {languageOptions.map(lang => (
+                <option key={lang.code} value={lang.code}>{lang.label}</option>
+              ))}
             </select>
           </div>
           

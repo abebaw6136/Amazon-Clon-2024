@@ -1,25 +1,20 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Amazon Clone",
+  "name": "Amazon Clone App",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "amazon_icon_128x108_4e0m9e7e_PO3_icon.ico",
+      "sizes": "128x108",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "amazon-pay-icon-256x176-ouno5z8m.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "256x176"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#232F3E",
   "background_color": "#ffffff"
 }

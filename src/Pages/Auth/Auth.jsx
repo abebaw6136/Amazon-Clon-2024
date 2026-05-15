@@ -48,12 +48,19 @@ function Auth() {
       setLoading({ ...loading, signUp: true });
       createUserWithEmailAndPassword(auth,email,password)
       .then((userInfo) => {
+        console.log('Signup successful:', {
+          uid: userInfo?.user?.uid,
+          email: userInfo?.user?.email,
+          creationTime: userInfo?.user?.metadata?.creationTime,
+          lastSignInTime: userInfo?.user?.metadata?.lastSignInTime,
+        });
+
         dispatch({
            type: type.SET_USER,
             user: userInfo.user,
           });
           setLoading({ ...loading, signUp: false });
-          navigate(navStateData?.state?.redirect ||"/");
+          navigate(navStateData?.state?.redirect ||"/" );
       })
       .catch((error) => {
         setError(error.message);
