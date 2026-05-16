@@ -42,7 +42,8 @@ app.post("/charge", async (req, res) => {
 
 // Endpoint for creating payment intent - called by frontend
 app.post("/payment/create", async (req, res) => {
-  const total = req.query.total;
+  const total = Number(req.query.total);
+
 
   if (total > 0) {
     try {

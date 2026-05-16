@@ -46,12 +46,19 @@ function Payment() {
 
       const clientSecret = response.data?.clientSecret;
 
+      console.log("Stripe clientSecret:", clientSecret);
+
+      if (!clientSecret) {
+        throw new Error("Missing clientSecret from backend response");
+      }
+
       // Confirm payment
       const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
       });
+
 
       // Save order to Firestore
       await db.collection('users', user.uid, 'orders').doc(paymentIntent.id).set({
