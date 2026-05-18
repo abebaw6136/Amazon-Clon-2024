@@ -1,6 +1,7 @@
 export const API_KEY = "AIzaSyC_LrDGDWAVMFVk6qF_6s1saFqSO4Epzec";
 export const productUrl="https://fakestoreapi.com"
-export const payment = "https://us-central1-clone-2024.cloudfunctions.net/api/charge";
+// Stripe payment intent endpoint (Firebase Functions)
+export const payment = "https://us-central1-clone-2024.cloudfunctions.net/api/payment/create";
 
 export default {
   FETCH_PRODUCTS: "https://fakestoreapi.com/products",

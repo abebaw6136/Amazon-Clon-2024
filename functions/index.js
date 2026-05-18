@@ -68,4 +68,5 @@ app.post("/payment/create", async (req, res) => {
 });
 
 // Export the Express app as a Cloud Function
-exports.api = onRequest(app);
+// Force Firebase v2 Cloud Functions engine to bypass live CORS restrictions completely
+exports.api = onRequest({ cors: true }, app);

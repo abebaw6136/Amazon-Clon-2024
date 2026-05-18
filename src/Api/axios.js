@@ -5,10 +5,12 @@ const axiosInstance = axios.create({
   baseURL: 'https://fakestoreapi.com',
 });
 
-// Stripe backend (local): http://localhost:5001/clon-2024/us-central1/api
-// Hardwired for local testing (prevents handshake/env mismatches).
+// Stripe backend (live)
+// Your function is deployed at: https://<region>-<project>.cloudfunctions.net/api
+// Keeping baseURL ending at `/api` avoids path concatenation bugs like `/charge/payment/create`.
 const axiosPrivate = axios.create({
-  baseURL: 'http://localhost:5001/clon-2024/us-central1/api',
+  baseURL: 'https://us-central1-clone-2024.cloudfunctions.net/api',
 });
+
 
 export { axiosInstance, axiosPrivate };
