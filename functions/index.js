@@ -6,7 +6,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const stripe = require("stripe")(process.env.STRIPE_KEY); 
 const app = express();
-app.use(cors({ origin: true }));
+// Be permissive: avoids Firebase v2 HTTPS CORS quirks on preflight.
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
